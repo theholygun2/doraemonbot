@@ -1,0 +1,5 @@
+discord.js
+dotenv
+colorette
+@sapphire/time-utilities
+enmap
