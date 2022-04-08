@@ -9,13 +9,13 @@ exports.run = async (client, message, args, level) => {
 exports.conf = {
   enabled: true,
   guildOnly: true,
-  aliases: [],
+  aliases: ["mylvl",'my lvl', 'my level'],
   permLevel: "User"
 };
 
 exports.help = {
   name: "mylevel",
   category: "Miscellaneous",
-  description: "Tells you your permission level for the current message location.",
+  description: "Tells your permission level for the current message location.",
   usage: "mylevel"
 };
