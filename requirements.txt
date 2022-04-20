@@ -3,3 +3,8 @@ dotenv
 colorette
 @sapphire/time-utilities
 enmap
+
+==timer==
+moment //
+node-schedule //timer.js
+moment-timezone
