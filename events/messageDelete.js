@@ -33,9 +33,9 @@ module.exports = async (client, message) => {
     user = message.author.username
   }
 
-    // We defined the logs channel earlier in this guide, so now we can send it to the channel!
+  //   // We defined the logs channel earlier in this guide, so now we can send it to the channel!
 
-    // const exampleEmbed = new MessageEmbed()
+  //   const exampleEmbed = new MessageEmbed()
 	// .setColor('#0099ff')
 	// .setTitle('Some title')
 	// .setURL('https://discord.js.org/')
@@ -53,7 +53,7 @@ module.exports = async (client, message) => {
 	// .setTimestamp()
 	// .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
     
-    // logs.send({ embeds: [exampleEmbed] });
+  //   logs.send({ embeds: [exampleEmbed] });
 
     
     logs.send(`A message from ${message.author.username} was deleted in ${message.channel.name} by ${user}`);
