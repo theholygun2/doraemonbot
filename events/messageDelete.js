@@ -35,9 +35,23 @@ module.exports = async (client, message) => {
 
   //   // We defined the logs channel earlier in this guide, so now we can send it to the channel!
 
+    const exampleEmbed = new MessageEmbed()
+	.setColor('#0099ff')
+	.setTitle('[MESSAGE DELETE]')
+	// .setAuthor({ name: client.username, iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+	.setDescription('Some description here')
+	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+	.addFields(
+		{ name: 'Executor', value: entry.executor.username },
+    { name: 'Delete Target', value: message.author.username },
+		{ name: '\u200B', value: '\u200B' },
+	)
+	.setTimestamp()
+    logs.send({ embeds: [exampleEmbed] });
+
   //   const exampleEmbed = new MessageEmbed()
 	// .setColor('#0099ff')
-	// .setTitle('Some title')
+	// .setTitle('[MESSAGE DELETE]')
 	// .setURL('https://discord.js.org/')
 	// .setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
 	// .setDescription('Some description here')
@@ -56,5 +70,5 @@ module.exports = async (client, message) => {
   //   logs.send({ embeds: [exampleEmbed] });
 
     
-    logs.send(`A message from ${message.author.username} was deleted in ${message.channel.name} by ${user}`);
+    //logs.send(`A message from ${message.author.username} was deleted in ${message.channel.name} by ${user}`);
 }

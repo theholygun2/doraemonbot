@@ -54,6 +54,6 @@ exports.run = (client, message, args, level) => {
   exports.help = {
     name: "timer",
     category: "Timer",
-    description: "Timer",
+    description: "Set up a timer that will notify you in the guild text channel",
     usage: "[command] [hh:mm:ss] [note] ex: !timer 5m Minum"
   };

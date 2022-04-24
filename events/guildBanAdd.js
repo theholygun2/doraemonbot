@@ -1,6 +1,6 @@
 const { Permissions } = require("discord.js");
 
-module.exports = (member) => {
+module.exports = async (member) => {
     const entry = await message.guild.fetchAuditLogs({ type: "MEMBER_BAN_ADD" }).then(audit => audit.entries.first())
 
     if (!banLog) return console.log(`${ban.user.tag} was banned from ${ban.guild.name} but no audit log could be found.`);

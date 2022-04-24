@@ -1,6 +1,6 @@
 const { Permissions } = require("discord.js");
 
-module.exports = (member) => {
+module.exports = async (member) => {
     const entry = await message.guild.fetchAuditLogs({ type: "MEMBER_KICK" }).then(audit => audit.entries.first())
 
     const { executor, target } = entry;
