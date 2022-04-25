@@ -4,16 +4,12 @@ const { getSettings, permlevel } = require("../modules/functions.js");
 const config = require("../config.js");
 
 module.exports = async (client, message) => {
-    // Firstly, we need a logs channel. 
     let logs = message.guild.channels.cache.find(channel => channel.name === "mod-log");
 
-//   // If there is no logs channel, we can create it if we have the 'MANAGE_CHANNELS' permission
-//   // Remember, this is completely options. Use to your best judgement.
 //   if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS) && !logs) {
 //     logs = await message.guild.channels.create("logs", { type: "GUILD_TEXT" }).catch(console.error);
 //   }
 
-  // If we do not have permissions, console log both errors
   if (!logs) { 
     return console.log("The logs channel does not exist and cannot be created");
   }
@@ -33,14 +29,15 @@ module.exports = async (client, message) => {
     user = message.author.username
   }
 
-  //   // We defined the logs channel earlier in this guide, so now we can send it to the channel!
+  let imageBaseUrl = 'https://cdn.discordapp.com'
+  let userAvatarPath = `avatars/${client.user.id}/${client.user.avatar}`
 
     const exampleEmbed = new MessageEmbed()
 	.setColor('#0099ff')
 	.setTitle('[MESSAGE DELETE]')
-	// .setAuthor({ name: client.username, iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-	.setDescription('Some description here')
-	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+	.setAuthor({ name: `${client.user.username}`, iconURL: `${imageBaseUrl}/${userAvatarPath}.jpg`})
+	.setDescription(`A message was deleted in ${entry.extra.channel.name}`)
+	.setThumbnail(`${imageBaseUrl}/${userAvatarPath}.jpg`)
 	.addFields(
 		{ name: 'Executor', value: entry.executor.username },
     { name: 'Delete Target', value: message.author.username },
