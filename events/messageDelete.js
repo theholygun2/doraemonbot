@@ -14,7 +14,6 @@ module.exports = async (client, message) => {
     return console.log("The logs channel does not exist and cannot be created");
   }
   const entry = await message.guild.fetchAuditLogs({ type: "MESSAGE_DELETE" }).then(audit => audit.entries.first())
-  let user = ""
 
   if (entry.executor.id === message.author.id) return
 
@@ -29,8 +28,8 @@ module.exports = async (client, message) => {
     user = message.author.username
   }
 
-  let imageBaseUrl = 'https://cdn.discordapp.com'
-  let userAvatarPath = `avatars/${client.user.id}/${client.user.avatar}`
+  let imageBaseUrl = 'https://cdn.discordapp.com/avatars/'
+  let userAvatarPath = `${client.user.id}/${client.user.avatar}`
 
     const exampleEmbed = new MessageEmbed()
 	.setColor('#0099ff')
@@ -40,7 +39,7 @@ module.exports = async (client, message) => {
 	.setThumbnail(`${imageBaseUrl}/${userAvatarPath}.jpg`)
 	.addFields(
 		{ name: 'Executor', value: entry.executor.username },
-    { name: 'Delete Target', value: message.author.username },
+    	{ name: 'Delete Target', value: message.author.username },
 		{ name: '\u200B', value: '\u200B' },
 	)
 	.setTimestamp()

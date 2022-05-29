@@ -26,7 +26,6 @@ for (let i = 0; i < permLevels.length; i++) {
 client.container = {
   commands,
   aliases,
-  slashcmds,
   levelCache
 };
 

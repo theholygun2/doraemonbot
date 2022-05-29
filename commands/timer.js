@@ -21,12 +21,13 @@ exports.run = (client, message, args, level) => {
     const absenLink = 'https://elearning.pnj.ac.id/course/view.php?id=10774'
     let imageBaseUrl = 'https://cdn.discordapp.com'
     let userAvatarPath = `avatars/${client.user.id}/${client.user.avatar}`
+    const secId = '968078434817409054'
 
     const exampleEmbed = new MessageEmbed()
     .setColor('#0099ff')
     .setTitle('[TIMER REMINDER]')
     .setAuthor({ name: `${client.user.username}`, iconURL: `${imageBaseUrl}/${userAvatarPath}.jpg`})
-    .setDescription(`<@&968078434817409054> Your Class Links: `)
+    .setDescription(`<@&${secId}> Your Class Links: `)
     .setThumbnail(`${imageBaseUrl}/${userAvatarPath}.jpg`)
     .addFields(
 		{ name: 'Google Meet Link: ', value: meetLink },
@@ -101,7 +102,7 @@ exports.run = (client, message, args, level) => {
     enabled: true,
     guildOnly: true,
     aliases: ['t'],
-    permLevel: "Bot Admin"
+    permLevel: "User"
   };
 
   exports.help = {
