@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
     .setColor('#0099ff')
     .setTitle('[List of Classes]')
     .setAuthor({ name: `${client.user.username}`, iconURL: `${imageBaseUrl}/${userAvatarPath}.jpg`})
-    .setDescription(`<@&968078434817409054> Your Class Links: `)
+    .setDescription(`<@${message.author.id}> Your Class Links: `)
     .setThumbnail(`${imageBaseUrl}/${userAvatarPath}.jpg`)
     .addFields(
 		    { name: 'shell', value: 'https://elearning.pnj.ac.id/course/view.php?id=10774'},
@@ -28,20 +28,19 @@ exports.run = (client, message, args) => {
         { name: 'mikrotik', value: 'https://elearning.pnj.ac.id/course/view.php?id=10775' },
 	)
 	.setTimestamp()
-
     message.channel.send({ embeds: [exampleEmbed]});
 }
 
 exports.conf = {
     enabled: true,
     guildOnly: true,
-    aliases: ['t'],
+    aliases: ['cl'],
     permLevel: "User"
   };
 
   exports.help = {
-    name: "list",
-    category: "Timer",
+    name: "class",
+    category: "Class",
     description: "List of classes",
-    usage: "~list"
+    usage: "[prefix]class"
   };
