@@ -51,6 +51,7 @@ function getSettings(guild) {
 }
 
 function getMessageCount(guild) {
+  
 }
 
 /*

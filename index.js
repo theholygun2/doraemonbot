@@ -12,7 +12,6 @@ const client = new Client({ intents, partials });
 // read from, catalogued, listed, etc.
 const commands = new Collection();
 const aliases = new Collection();
-const slashcmds = new Collection();
 
 // Generate a cache of client permissions for pretty perm names in commands.
 const levelCache = {};
