@@ -61,4 +61,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# Sqlite Database
+database.sqlite
+dbInit.js
+
 /.vscode/

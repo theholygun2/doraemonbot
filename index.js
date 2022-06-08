@@ -2,14 +2,11 @@ if (Number(process.version.slice(1).split(".")[0]) < 16) throw new Error("Node 1
 require("dotenv").config();
 
 const { Client, Collection } = require("discord.js");
-// We also load the rest of the things we need in this file:
 const { readdirSync } = require("fs");
 const { intents, partials, permLevels } = require("./config.js");
 const logger = require("./modules/logger.js");
 const client = new Client({ intents, partials });
 
-// Aliases, commands and slash commands are put in collections where they can be
-// read from, catalogued, listed, etc.
 const commands = new Collection();
 const aliases = new Collection();
 

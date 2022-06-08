@@ -1,34 +1,35 @@
 const { Permissions, MessageEmbed } = require("discord.js");
+const {Users, Courses} = require("../dbObjects")
 
-exports.run = (client, message, args) => {
+exports.run = async (client, message) => {
 
     const guildId = message.guild.id;
-    const meetLink = 'https://meet.google.com/qbk-gwnw-ecu'
-    const absenLink = 'https://elearning.pnj.ac.id/course/view.php?id=10774'
-    let imageBaseUrl = 'https://cdn.discordapp.com/avatars/'
-    let userAvatarPath = `${client.user.id}/${client.user.avatar}`
-
-
-    const exampleEmbed = new MessageEmbed()
-    .setColor('#0099ff')
-    .setTitle('[List of Classes]')
-    .setAuthor({ name: `${client.user.username}`, iconURL: `${imageBaseUrl}/${userAvatarPath}.jpg`})
-    .setDescription(`<@${message.author.id}> Your Class Links: `)
-    .setThumbnail(`${imageBaseUrl}/${userAvatarPath}.jpg`)
-    .addFields(
-		    { name: 'shell', value: 'https://elearning.pnj.ac.id/course/view.php?id=10774'},
-        { name: 'Link', value: 'https://meet.google.com/qbk-gwnw-ecu'},
-        { name: 'pm', value: 'https://elearning.pnj.ac.id/course/view.php?id=10777' },
-        { name: 'eng', value: 'https://elearning.pnj.ac.id/course/view.php?id=10780' },
-        { name: 'proj', value: 'https://elearning.pnj.ac.id/course/view.php?id=10782' },
-        { name: 'dist', value: 'https://elearning.pnj.ac.id/course/view.php?id=10779' },
-        { name: 'java', value: 'https://elearning.pnj.ac.id/course/view.php?id=10776' },
-        { name: 'security', value: 'https://elearning.pnj.ac.id/course/view.php?id=10778' },
-        { name: 'crypto', value: 'https://classroom.google.com/u/0/c/NDgyNTYwNTQ5NzM1' },
-        { name: 'mikrotik', value: 'https://elearning.pnj.ac.id/course/view.php?id=10775' },
-	)
-	.setTimestamp()
-    message.channel.send({ embeds: [exampleEmbed]});
+    const user = message.author
+    const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpg`
+    const Embed = new MessageEmbed()
+    .setTitle(`[YOUR COURS] ${user.tag}`)
+    .setThumbnail(`${avatarUrl}`);
+    const db_user = await Users.findOne({where: { user_id: user.id}})
+  if(db_user){
+    const cours = await Courses.findAll({where: {user_id: user.id}})
+    cours.forEach(target => {
+      Embed.addField(target.name, target.link)
+    });
+  }
+    
+//     Embed.addFields(
+//       { name: 'shell', value: 'https://elearning.pnj.ac.id/course/view.php?id=10774'},
+//       { name: 'Link', value: 'https://meet.google.com/qbk-gwnw-ecu'},
+//       { name: 'pm', value: 'https://elearning.pnj.ac.id/course/view.php?id=10777' },
+//       { name: 'eng', value: 'https://elearning.pnj.ac.id/course/view.php?id=10780' },
+//       { name: 'proj', value: 'https://elearning.pnj.ac.id/course/view.php?id=10782' },
+//       { name: 'dist', value: 'https://elearning.pnj.ac.id/course/view.php?id=10779' },
+//       { name: 'java', value: 'https://elearning.pnj.ac.id/course/view.php?id=10776' },
+//       { name: 'security', value: 'https://elearning.pnj.ac.id/course/view.php?id=10778' },
+//       { name: 'crypto', value: 'https://classroom.google.com/u/0/c/NDgyNTYwNTQ5NzM1' },
+//       { name: 'mikrotik', value: 'https://elearning.pnj.ac.id/course/view.php?id=10775' },
+// )
+  return message.reply({embeds: [Embed]})
 }
 
 exports.conf = {

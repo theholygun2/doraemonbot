@@ -1,7 +1,6 @@
 const logger = require("./logger.js");
 const config = require("../config.js");
 const { settings } = require("./settings.js");
-const { messageCount } = require("./messageCount.js")
 // Let's start by getting some useful functions that we'll use throughout
 // the bot, like logs and elevation features.
 
@@ -48,10 +47,6 @@ function getSettings(guild) {
   // This "..." thing is the "Spread Operator". It's awesome!
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
   return ({...settings.get("default"), ...guildConf});
-}
-
-function getMessageCount(guild) {
-  
 }
 
 /*
@@ -101,4 +96,4 @@ process.on("unhandledRejection", err => {
   console.error(err);
 });
 
-module.exports = { getSettings, getMessageCount, permlevel, awaitReply, toProperCase };
+module.exports = { getSettings, permlevel, awaitReply, toProperCase };
