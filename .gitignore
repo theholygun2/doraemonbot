@@ -64,5 +64,6 @@ typings/
 # Sqlite Database
 database.sqlite
 dbInit.js
+dbObjects.js
 
 /.vscode/
