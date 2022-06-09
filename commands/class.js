@@ -16,19 +16,6 @@ exports.run = async (client, message) => {
       Embed.addField(target.name, target.link)
     });
   }
-    
-//     Embed.addFields(
-//       { name: 'shell', value: 'https://elearning.pnj.ac.id/course/view.php?id=10774'},
-//       { name: 'Link', value: 'https://meet.google.com/qbk-gwnw-ecu'},
-//       { name: 'pm', value: 'https://elearning.pnj.ac.id/course/view.php?id=10777' },
-//       { name: 'eng', value: 'https://elearning.pnj.ac.id/course/view.php?id=10780' },
-//       { name: 'proj', value: 'https://elearning.pnj.ac.id/course/view.php?id=10782' },
-//       { name: 'dist', value: 'https://elearning.pnj.ac.id/course/view.php?id=10779' },
-//       { name: 'java', value: 'https://elearning.pnj.ac.id/course/view.php?id=10776' },
-//       { name: 'security', value: 'https://elearning.pnj.ac.id/course/view.php?id=10778' },
-//       { name: 'crypto', value: 'https://classroom.google.com/u/0/c/NDgyNTYwNTQ5NzM1' },
-//       { name: 'mikrotik', value: 'https://elearning.pnj.ac.id/course/view.php?id=10775' },
-// )
   return message.reply({embeds: [Embed]})
 }
 
@@ -41,7 +28,7 @@ exports.conf = {
 
   exports.help = {
     name: "class",
-    category: "Class",
-    description: "List of classes",
+    category: "Cours",
+    description: "List of courses",
     usage: "[prefix]class"
   };

@@ -2,17 +2,10 @@ const { settings } = require("../modules/settings.js");
 const { Users, Courses } = require('../dbObjects.js');
 
 exports.run = async (client, message, args) => {
-  
+
   const [name, link] = (args);
   const user = message.author
   var newCours = Courses.build({ name: name, link: link, user_id: user.id});
-  // try {
-  //   await Users.create({user_id: user.id, username: user.username})
-  //   await newCours.save()
-  // } catch (error) {
-  //   console.log(error);
-  // }
-  
 
   const res = await Users.findOne({where: { user_id: user.id}})
   if(!res){
@@ -36,7 +29,7 @@ exports.run = async (client, message, args) => {
     }
     else{
       await newCours.save()
-      return message.reply(`Hello new user~ ${newCours.link} has been saved to: ${newCours.name} you can use: ~class to look at your saved links!`)
+      return message.reply(`Your link: ${newCours.link} has been saved to: ${newCours.name} you can use: ~class to look at your saved links!`)
     }
   } 
   return console.log("something wrong men")
@@ -45,13 +38,13 @@ exports.run = async (client, message, args) => {
 exports.conf = {
     enabled: true,
     guildOnly: true,
-    aliases: ['as'],
+    aliases: ['ass'],
     permLevel: "User"
   };
 
   exports.help = {
     name: "assign",
-    category: "Class",
+    category: "Cours",
     description: "add links",
-    usage: "[prefix]add '[Subject] [link]'"
+    usage: "[prefix]'"
   };
