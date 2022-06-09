@@ -1,47 +1,45 @@
 const schedule = require('node-schedule');
 const moment = require('moment-timezone');
 const parseDateString = require('../modules/utils/parseDateString.js')
-const { settings } = require("../modules/settings.js");
-const { Permissions, MessageEmbed } = require("discord.js");
+const { MessageEmbed, Formatters } = require("discord.js");
+const {Users, Courses} = require("../dbObjects")
+const { Op } = require("sequelize")
 
-exports.run = (client, message, args, level) => {
+exports.run =  async (client, message, [subject, timerValue, timerDescription, ...af]) => {
 
-    console.log(settings)
+    // const [subject, timerValue, timerDescription] = (args);
+    const timeZone = 'Asia/Jakarta';
 
-    const [timerValue, timerDescription] = (args); //tv=15s td=andi
-
+    const user = message.author
     const timerDate = parseDateString(timerValue);
     const DATE_FORMAT = process.env.DATE_FORMAT || 'DD/MM/YY hh:mm A Z';
     const TimerMetaData = require('../modules/timeObj/TimerMetaData');
     const getNextAvailableJobId = require('../modules/utils/getNextAvailableJobId');
     const timerMetaDataRepository = require('../modules/timeObj/TimerMetaDataRepository');
-
     const guildId = message.guild.id;
-    const meetLink = 'https://meet.google.com/qbk-gwnw-ecu'
-    const absenLink = 'https://elearning.pnj.ac.id/course/view.php?id=10774'
-    let imageBaseUrl = 'https://cdn.discordapp.com'
-    let userAvatarPath = `avatars/${client.user.id}/${client.user.avatar}`
-    const secId = '968078434817409054'
+    let userAvatarPath = `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}`
+
+    if (subject === 'status') {
+      return message.channel.send(buildScheduledJobsTable(timerMetaDataRepository.getAllTimerMetadata(guildId),timeZone));
+    };
+    
+    const db_user = await Users.findOne({where: { user_id: user.id}})
+    if(!db_user) return
+    const cours = await Courses.findOne({where: {user_id: user.id, name: {[Op.like]: subject}}})
+    if(!cours) return
 
     const exampleEmbed = new MessageEmbed()
     .setColor('#0099ff')
     .setTitle('[TIMER REMINDER]')
-    .setAuthor({ name: `${client.user.username}`, iconURL: `${imageBaseUrl}/${userAvatarPath}.jpg`})
-    .setDescription(`<@&${secId}> Your Class Links: `)
-    .setThumbnail(`${imageBaseUrl}/${userAvatarPath}.jpg`)
+    .setAuthor({ name: `${client.user.username}`, iconURL: `${userAvatarPath}.jpg`})
+    .setDescription(`<@${user.id}> Your Class Links: `)
+    .setThumbnail(`${userAvatarPath}.jpg`)
     .addFields(
-		{ name: 'Google Meet Link: ', value: meetLink },
-    { name: 'Absen Link: ', value: absenLink },
+    { name: 'Absen Link: ', value: Formatters.hyperlink(`${cours.name}`, `${cours.link}`, `${cours.link}`) },
 		{ name: '\u200B', value: '\u200B' },
 	)
 	.setTimestamp()
 
-
-
-    if (timerValue === 'status') {
-      const timeZone = 'Asia/Jakarta';
-      return message.channel.send(buildScheduledJobsTable(timerMetaDataRepository.getAllTimerMetadata(guildId),timeZone));
-    };
 
     if (timerDate !== null) {
         const jobId = getNextAvailableJobId();
@@ -59,8 +57,8 @@ exports.run = (client, message, args, level) => {
         timerMetaData.setJobId(jobId);
         timerMetaData.setDate(timerDate);
         timerMetaData.setDescription(timerDescription);
-        timerMetaData.setUserOrRoleToNotify(message.author.username);
-        timerMetaData.setUserOrRoleIdToNotify(message.author.id);
+        timerMetaData.setUserOrRoleToNotify(user.username);
+        timerMetaData.setUserOrRoleIdToNotify(user.id);
         timerMetaData.setScheduledJob(scheduledJob);
 
         timerMetaDataRepository.addTimerMetadata(guildId, timerMetaData);
@@ -68,7 +66,7 @@ exports.run = (client, message, args, level) => {
         message.channel.send('Timer scheduled for ' + moment(scheduledJob.nextInvocation().toISOString()).tz(timeZone).format(DATE_FORMAT) + '.');
     }
      else {
-        message.channel.send('Unable to parse the date string.');
+        message.channel.send('Unable to parse the date string. please us 4h/5m/4s');
     } 
   };
   
@@ -107,8 +105,8 @@ exports.run = (client, message, args, level) => {
 
   exports.help = {
     name: "timer",
-    category: "Timer",
-    description: "Set up a timer that will notify your class role in the guild text channel",
+    category: "Cours",
+    description: "(BETA)Notify absen| cara pakai: ~t <subject> 1h15s",
     usage: "[command] <[hh:mm:ss] or [status]> [note] ex: ~timer 5m Minum or ~timer status"
   };
 

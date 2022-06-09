@@ -1,19 +1,20 @@
+const { MessageActionRow, MessageButton } = require('discord.js');
 
 exports.run = (client, message) => {
-    message.reply("BLA BLA")
+  
 }
 
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: [],
+    aliases: ['dis'],
     permLevel: "User"
   };
   
   exports.help = {
     name: "disclamer",
     category: "Member",
-    description: "Evaluates arbitrary javascript.",
+    description: "_",
     usage: "eval [...code]"
   };
   

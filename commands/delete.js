@@ -1,16 +1,28 @@
 const {Users, Courses} = require("../dbObjects")
+const { Op } = require('sequelize');
 
-exports.run = async (client, message, name) => {
+exports.run = async (client, message, [name]) => {
     const user = message.author
-    const row = await Courses.findOne({where: {user_id: user.id, name: name}})
-    if(row) {
-        try {
-            await row.destroy()
-            return message.reply(`Key: ${name} deleted sucessful`)   
-        } catch (error) {
-            console.log(error)
-        }
+    name = name[0]
+    if(!name) return 
+
+    if(name == "all"){        
+        const allRow = await Courses.findOne({where: {user_id: user.id}})
+        await allRow.destroy()
+        return message.reply('all key deleted')
     }
+
+    try {
+        const row = await Courses.findOne({where: {user_id: user.id, name: {[Op.like]: name}}})
+        if(row) {
+            await row.destroy()
+            return message.reply(`Key: ${name} deleted sucessful`) 
+        }
+    } catch (error) {
+        console.log(error);
+        return message.reply("lala")
+    }
+    
     message.reply(`"Key ${name} not found!"`)
 }
 
@@ -24,6 +36,6 @@ exports.conf = {
   exports.help = {
     name: "delete",
     category: "Cours",
-    description: "delete ",
-    usage: "[prefix]delete <key>'"
+    description: "delete <cours>",
+    usage: "~d <cours>'"
   };

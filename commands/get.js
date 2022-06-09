@@ -30,12 +30,12 @@ exports.conf = {
     enabled: true,
     guildOnly: true,
     aliases: ['g'],
-    permLevel: "User"
+    permLevel: "Admin"
   };
 
   exports.help = {
     name: "get",
-    category: "Class",
+    category: "cours",
     description: "get",
     usage: "[prefix]add '[Subject] [link]'"
   };

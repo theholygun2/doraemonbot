@@ -12,25 +12,6 @@ exports.run = async (client, message) => {
     let memberJoinedAt = moment(member.joinedAt.toISOString()).tz(timeZone).format(DATE_FORMAT);
     let avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpg`
 
-//     const Enmap = require("enmap");
-//     client.messages = new Enmap("messages");
-
-//     client.on("message", message => {
-//       if (message.author.bot) return;
-//       if (message.guild) {
-//         const key = `${message.guild.id}-${message.author.id}`;
-//         client.messages.ensure(key, {          
-//           user: message.author.id,
-//           guild: message.guild.id,
-//           messages: 0
-//     });
-    
-//     client.messages.inc(key, "messages");
-//     // Do your stuff here.
-//     console.log(client.messages.get(key, "messages"))
-//   }
-// });
-
     message.channel.send({ embeds: [{
         color: 3447003,
     thumbnail: {
@@ -72,7 +53,7 @@ exports.run = async (client, message) => {
 exports.conf = {
     enabled: true,
     guildOnly: true,
-    aliases: ['t'],
+    aliases: ['p','prof'],
     permLevel: "User"
   };
 
