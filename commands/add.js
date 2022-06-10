@@ -5,14 +5,17 @@ exports.run = async (client, message, args) => {
   const [name, kode] = args
   const user = message.author
   let link = "https://elearning.pnj.ac.id/course/view.php?id="
+
+  if(name.length > 8) return message.reply("subject must not be longer than 8 characters/digit")
+  isNaN(kode) ? link=kode : link=`${link}${kode}`
+  if(args.length == 0) return message.reply({content: 'OWKOKWW'})
+
   
   const embed = new MessageEmbed()
     .setColor(3447003)
     .setThumbnail("https://i.imgur.com/yVpymuV.png");
-
-  if(args.length == 0) return message.reply({content: 'OWKOKWW'})
   
-  kode.startsWith("https://elearning.pnj.ac.id/course/view.php?id=") ? link : link=`${link}${kode}` 
+  
   var newCours = Courses.build({ name: name, link: link, user_id: user.id});
   const db_user = await Users.findOne({where: { user_id: user.id}})
   if(!db_user){

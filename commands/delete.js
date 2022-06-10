@@ -1,7 +1,7 @@
 const {Users, Courses} = require("../dbObjects")
 const { Op } = require('sequelize');
 
-exports.run = async (client, message, [name]) => {
+exports.run = async (client, message, name) => {
     const user = message.author
     name = name[0]
     if(!name) return 
