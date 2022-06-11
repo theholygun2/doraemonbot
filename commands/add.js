@@ -8,13 +8,7 @@ exports.run = async (client, message, args) => {
 
   if(name.length > 8) return message.reply("subject must not be longer than 8 characters/digit")
   isNaN(kode) ? link=kode : link=`${link}${kode}`
-  if(args.length == 0) return message.reply({content: 'OWKOKWW'})
-
-  
-  const embed = new MessageEmbed()
-    .setColor(3447003)
-    .setThumbnail("https://i.imgur.com/yVpymuV.png");
-  
+  if(args.length == 0) return message.reply({content: 'OWKOKWW'})   
   
   var newCours = Courses.build({ name: name, link: link, user_id: user.id});
   const db_user = await Users.findOne({where: { user_id: user.id}})
@@ -54,6 +48,6 @@ exports.conf = {
   exports.help = {
     name: "add",
     category: "Cours",
-    description: "Masukan ID elearning atau link | ~a <cours> <id/link>",
+    description: "Masukan cours | ~a <cours> <id/link>",
     usage: "~a <cours> <kode/link> | ~a shellscript <123456>"
   };

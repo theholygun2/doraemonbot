@@ -1,7 +1,7 @@
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 exports.run = (client, message) => {
-  
+  return
 }
 
 exports.conf = {
@@ -15,6 +15,6 @@ exports.conf = {
     name: "disclamer",
     category: "Member",
     description: "_",
-    usage: "eval [...code]"
+    usage: "disclamer"
   };
   

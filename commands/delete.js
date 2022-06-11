@@ -7,8 +7,7 @@ exports.run = async (client, message, name) => {
     if(!name) return 
 
     if(name == "all"){        
-        const allRow = await Courses.findOne({where: {user_id: user.id}})
-        await allRow.destroy()
+        await Courses.destroy({where: {user_id: user.id}})
         return message.reply('all key deleted')
     }
 
