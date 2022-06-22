@@ -11,7 +11,7 @@ exports.run = async (client, message) => {
     .setThumbnail(`${avatarUrl}`);
     const db_user = await Users.findOne({where: { user_id: user.id}})
 
-    if(!db_user) return
+    if(!db_user) return message.reply("cours is empty! add a course using: ~a <newcours> <elearnId/link>")
     const cours = await Courses.findAll({where: {user_id: user.id}})
     cours.forEach(target => {
       embed.addField("\u200b",Formatters.hyperlink(`${target.name}`, `${target.link}`, `${target.link}`))

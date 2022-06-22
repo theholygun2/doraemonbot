@@ -8,14 +8,18 @@ exports.run = async (client, message, mention) => {
   if(!target || target === user) return
   const db_user = Users.findOne({where: {user_id: user.id}})
   if(!db_user) await Users.create({user_id: user.id, username: user.username})
-  await Courses.destroy({where: {user_id: user.id}})
+  //await Courses.destroy({where: {user_id: user.id}})
   
+  const row = await Courses.findOne({where: {user_id : target.id}})
+  if(!row) return "user dont have any link saved"
   const allRow = await Courses.findAll({where: {user_id: target.id}})
   if(!allRow) return "user dont have any link saved"
 
   allRow.forEach(target => {
-    Courses.create({user_id: user.id, name: target.name, link: target.link})
+    Courses.findOne({where: {user_id: user.id, name: target.name}})
   });
+
+  Courses.create({user_id: user.id, name: target.name, link: target.link})
 
 	return message.reply(`link imported from user ${target.username}`);
 }

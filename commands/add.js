@@ -2,13 +2,15 @@ const { Users, Courses } = require('../dbObjects.js');
 const { MessageEmbed } = require('discord.js')
 
 exports.run = async (client, message, args) => {
+  
   const [name, kode] = args
   const user = message.author
   let link = "https://elearning.pnj.ac.id/course/view.php?id="
-
+  if(args.length == 0) return message.reply({content: 'OWKOKWW'})   
+  if(!name) return message.reply("~a <newcours> <elearningid/link>")
   if(name.length > 8) return message.reply("subject must not be longer than 8 characters/digit")
   isNaN(kode) ? link=kode : link=`${link}${kode}`
-  if(args.length == 0) return message.reply({content: 'OWKOKWW'})   
+  
   
   var newCours = Courses.build({ name: name, link: link, user_id: user.id});
   const db_user = await Users.findOne({where: { user_id: user.id}})

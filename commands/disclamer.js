@@ -1,7 +1,8 @@
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 exports.run = (client, message) => {
-  return
+  const msg = "Doraemon is here!!! With his Pocket To Help Your Server"
+  return message.channel.send("")
 }
 
 exports.conf = {
