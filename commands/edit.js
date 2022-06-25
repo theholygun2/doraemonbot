@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
   const [name, newName] = (args)
 
   if(!name) return
-  if(newName.length > 8 ) return
+  if(newName.length > 10 ) return message.reply("can be more than 10")
   try {
       const row = await Courses.findOne({where: {user_id: user.id, name: {[Op.like]: name}}})
       if(row) {
