@@ -96,4 +96,8 @@ process.on("unhandledRejection", err => {
   console.error(err);
 });
 
+function createUser(user) {
+  return 
+}
+
 module.exports = { getSettings, permlevel, awaitReply, toProperCase };

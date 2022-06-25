@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
   const user = message.author
   let link = "https://elearning.pnj.ac.id/course/view.php?id="
 
-  if(name.length > 8) return message.reply("subject must not be longer than 8 characters/digit")
+  if(name.length > 10) return message.reply("subject must not be longer than 10 characters/digit")
   isNaN(kode) ? link=kode : link=`${link}${kode}`
   if(args.length == 0) return message.reply({content: 'OWKOKWW'})   
   

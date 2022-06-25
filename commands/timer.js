@@ -97,7 +97,7 @@ exports.run =  async (client, message, [subject, timerValue, timerDescription, .
 }
 
   exports.conf = {
-    enabled: true,
+    enabled: false,
     guildOnly: true,
     aliases: ['t'],
     permLevel: "User"
