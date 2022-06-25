@@ -1,10 +1,6 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
 exports.run = (client, message) => {
-<<<<<<< HEAD
-  const msg = "Doraemon is here!!! With his Pocket To Help Your Server"
-  return message.channel.send("")
-=======
   const avatarUrl = `https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.jpg`
   const text = `
 Hello!
@@ -33,7 +29,6 @@ const embed = new MessageEmbed()
 .setDescription(text)
 
 message.reply({embeds: [embed]});
->>>>>>> b1
 }
 
 exports.conf = {
