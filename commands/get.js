@@ -5,23 +5,27 @@ exports.run = async (client, message, mention) => {
   const user = message.author
   const target = message.mentions.users.first()
 
-  async function getCoursById(db_user, target){
+  async function importById(user, from){
     try {
-        const row = await Courses.findAll({where: {user_id: target.id}})
-        if(!row) return message.reply(`${target.name} dont have any links saved`)
-        row.forEach(target => {
-            Courses.findOrCreate({where: {name: target.name, user_id: db_user.id}, defaults: {link: target.link}})
+        const fromRow = await Courses.findAll({where: {user_id: from.id}})
+        if(!fromRow) return "dont have any link saved"
+        fromRow.forEach(row => {
+            Courses.findOrCreate({where: {name: row.name, user_id: user.id}, defaults: {link: row.link}})
           });
     } catch (error) {
         console.log(error)
-        return message.reply("there some kind of error")
     }
-  }
+}
 
   try {
     if(!target || target === user) return
-    const db_user = Users.findOne({where: {user_id: user.id}})
-    if(!db_user) await Users.create({user_id: user.id, username: user.username}).then(getCoursById(db_user.id, target.id) )
+    const db_user = await Users.findOne({where: {user_id: user.id}})
+    if(!db_user){
+      await Users.create({user_id: user.id, username: user.tag}).then(result => {
+        if(result) importById(user, target)
+      })
+    }
+    await importById(user, target)
     return message.reply(`link imported from user ${target.username}`);
   } catch (error) {
     return message.reply("there some kind of error")
