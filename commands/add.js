@@ -31,6 +31,7 @@ exports.run = async (client, message, args) => {
         await row.save()
         return message.reply(`Link inside ${name} has been changed`)
       }
+    await newCours.save()
     return message.reply(`Link has been saved to ${name}`)
 }
 
