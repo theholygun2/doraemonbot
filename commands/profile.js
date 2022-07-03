@@ -34,7 +34,7 @@ exports.run = async (client, message) => {
     inline: true
     },
     {
-      name: "Joined at:",
+      name: "Masuk server ini pada tanggal:",
       value: memberJoinedAt,
       inline: true
     },

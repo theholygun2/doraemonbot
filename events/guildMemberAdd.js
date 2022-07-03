@@ -2,6 +2,7 @@ const { getSettings } = require("../modules/functions.js");
 
 module.exports = (client, member) => {
     
+    console.log('kadf')
     const settings = getSettings(member.guild);
 
     if (settings.welcomeEnabled !== "true") return;

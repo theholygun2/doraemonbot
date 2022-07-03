@@ -34,7 +34,7 @@ exports.conf = {
 
   exports.help = {
     name: "delete",
-    category: "Cours",
-    description: "delete <cours>",
-    usage: "~d <cours>'"
+    category: "Course",
+    description: "delete <course> / del all",
+    usage: "~d <course>'"
   };

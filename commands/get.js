@@ -41,7 +41,7 @@ exports.conf = {
 
   exports.help = {
     name: "get",
-    category: "Cours",
-    description: "import cours dari memberlain | ~g @namauser",
+    category: "Course",
+    description: "import course dari memberlain | ~g @namauser",
     usage: "[prefix]add '[Subject] [link]'"
   };

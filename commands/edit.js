@@ -30,7 +30,7 @@ exports.conf = {
 
   exports.help = {
     name: "edit",
-    category: "Cours",
+    category: "Course",
     description: "Edit cours | ~a <cours> <newcours>",
     usage: "~e <cours> <newcours>"
   };

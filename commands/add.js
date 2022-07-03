@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
   const user = message.author
   let link = "https://elearning.pnj.ac.id/course/view.php?id="
   
-  if(name.length > 10) return message.reply("subject must not be longer than 10 characters/digit")
+  if(name.length > 11) return message.reply("subject must not be longer than 10 characters/digit")
   isNaN(kode) ? link=kode : link=`${link}${kode}`
   
   const db_user = await Users.findOne({where: {user_id: user.id}})
@@ -44,7 +44,7 @@ exports.conf = {
 
   exports.help = {
     name: "add",
-    category: "Cours",
-    description: "Masukan cours | ~a <cours> <id/link>",
-    usage: "~a <cours> <kode/link> | ~a shellscript <123456>"
+    category: "Course",
+    description: "Masukan cours | ~add <course> <id/link>",
+    usage: "~a <cours> <kode/link> | ~add shellscript <123456>"
   };
