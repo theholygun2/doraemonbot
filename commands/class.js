@@ -10,9 +10,7 @@ exports.run = async (client, message) => {
     .setColor(3447003)
     .setTitle(`${user.tag}`)
     .setThumbnail(`${avatarUrl}`);
-    const db_user = await Users.findOne({where: { user_id: user.id}})
-
-    if(!db_user) return message.reply("course is empty! add a course using: ~a <newcourse> <elearnId/link>")
+    
     const cours = await Courses.findAll({where: {user_id: user.id}, order: [['name', 'ASC']]})
     cours.forEach(target => {
       embed.addField("\u200b",Formatters.hyperlink(`${toProperCase(target.name)}`, `${target.link}`, `${target.link}`))

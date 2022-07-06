@@ -1,15 +1,15 @@
 const {Users, Courses} = require("../dbObjects")
 const { Op } = require('sequelize');
 
-exports.run = async (client, message, name) => {
+exports.run = async (client, message, [...name], perm) => {
     const user = message.author
-    name = name[0]
-    if(!name) return 
-
-    if(name == "all"){        
+    if(name.length == 0) return 
+    if(name.length == 1 && name[0] == 'all'){        
         await Courses.destroy({where: {user_id: user.id}})
         return message.reply('all key deleted')
     }
+    name = name.join(' ').toString()
+    console.log(name)
 
     try {
         const row = await Courses.findOne({where: {user_id: user.id, name: {[Op.like]: name}}})

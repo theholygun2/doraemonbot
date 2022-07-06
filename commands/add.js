@@ -2,15 +2,16 @@ const { Users, Courses } = require('../dbObjects.js');
 const { MessageEmbed, User } = require('discord.js')
 const { Op } = require('sequelize');
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, [kode, ...name]) => {
   
-  console.log(args.length)
-  if(args.length != 2) return
-  const [name, kode] = args
+  if(kode == null && name.length == 0) return
+  console.log(kode)
+  name.length == 0 ? name="unamed link" : name = name.join(' ')
+  console.log(name)
+  
   const user = message.author
   let link = "https://elearning.pnj.ac.id/course/view.php?id="
-  
-  if(name.length > 11) return message.reply("subject must not be longer than 10 characters/digit")
+
   isNaN(kode) ? link=kode : link=`${link}${kode}`
   
   const db_user = await Users.findOne({where: {user_id: user.id}})
@@ -45,6 +46,6 @@ exports.conf = {
   exports.help = {
     name: "add",
     category: "Course",
-    description: "Masukan cours | ~add <course> <id/link>",
+    description: "Masukan cours | ~add <id/link> <nama>",
     usage: "~a <cours> <kode/link> | ~add shellscript <123456>"
   };
