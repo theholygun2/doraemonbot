@@ -7,6 +7,12 @@ exports.run = async (client, message, [kode, ...name]) => {
   if(kode == null || name.length == 0) return 
   console.log(kode)
   console.log(name.length)
+  if (!(kode.indexOf("http://") == 0 && kode.indexOf("https://") == 0)) {
+        return message.reply('use https:// or http:// atau format kebalik?| ~add <link> <nama>')
+  }
+  if ((name.indexOf("http://") == 0 || name.indexOf("https://") == 0)) {
+        return message.reply("formatnya kebalik, format: ~add <link> <nama>")
+  }
   name.length == 0 ? name="unamed link" : name = name.join(' ')
   console.log(name)
   
