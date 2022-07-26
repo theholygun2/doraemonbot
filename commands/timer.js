@@ -4,6 +4,8 @@ const parseDateString = require('../modules/utils/parseDateString.js')
 const { MessageEmbed, Formatters } = require("discord.js");
 const {Users, Courses} = require("../dbObjects")
 const { Op } = require("sequelize")
+const { toProperCase } = require("../modules/functions.js");
+const { codeBlock } = require("@discordjs/builders");
 
 exports.run =  async (client, message, [subject, timerValue, timerDescription, ...af]) => {
 
@@ -30,17 +32,16 @@ exports.run =  async (client, message, [subject, timerValue, timerDescription, .
 
     const exampleEmbed = new MessageEmbed()
     .setColor('#0099ff')
-    .setTitle('[TIMER REMINDER]')
+    .setTitle('[Notifikasi Absen]')
     .setAuthor({ name: `${client.user.username}`, iconURL: `${userAvatarPath}.jpg`})
-    .setDescription(`<@${user.id}> Your Class Links: `)
+    .setDescription(`<@${user.id}> Hayu Absen !!! `)
     .setThumbnail(`${userAvatarPath}.jpg`)
-    .addFields(
-    { name: 'Absen Link: ', value: Formatters.hyperlink(`${cours.name}`, `${cours.link}`, `${cours.link}`) },
-		{ name: '\u200B', value: '\u200B' },
-	)
-	.setTimestamp()
-
-
+	  .setTimestamp()
+    .setFields([{
+      name: "Link Kelas mu: ",
+      value: `[${toProperCase(cours.name)}](${cours.link})`,
+      inline: "true"
+    }])
     if (timerDate !== null) {
         const jobId = getNextAvailableJobId();
         const scheduledJob = schedule.scheduleJob(timerDate, function () {
@@ -97,7 +98,7 @@ exports.run =  async (client, message, [subject, timerValue, timerDescription, .
 }
 
   exports.conf = {
-    enabled: false,
+    enabled: true,
     guildOnly: true,
     aliases: ['t'],
     permLevel: "User"
@@ -105,7 +106,7 @@ exports.run =  async (client, message, [subject, timerValue, timerDescription, .
 
   exports.help = {
     name: "timer",
-    category: "Cours",
+    category: "Course",
     description: "(BETA)Notify absen| cara pakai: ~t <subject> 1h15s",
     usage: "[command] <[hh:mm:ss] or [status]> [note] ex: ~timer 5m Minum or ~timer status"
   };

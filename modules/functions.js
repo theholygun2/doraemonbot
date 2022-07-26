@@ -1,6 +1,7 @@
 const logger = require("./logger.js");
 const config = require("../config.js");
 const { settings } = require("./settings.js");
+const {Users, Courses} = require("../dbObjects")
 // Let's start by getting some useful functions that we'll use throughout
 // the bot, like logs and elevation features.
 
@@ -96,8 +97,5 @@ process.on("unhandledRejection", err => {
   console.error(err);
 });
 
-function createUser(user) {
-  return 
-}
 
-module.exports = { getSettings, permlevel, awaitReply, toProperCase };
+module.exports = { getSettings, permlevel, awaitReply, toProperCase};

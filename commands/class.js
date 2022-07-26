@@ -5,8 +5,16 @@ const { toProperCase } = require('../modules/functions')
 exports.run = async (client, message) => {
 
     const user = message.author
-    const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpg`
-    const embed = new MessageEmbed()
+    const embeds = await getUserCourse(user)
+    return message.reply({embeds: [embeds]});
+}
+
+
+
+async function getUserCourse(user){
+  
+  const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpg`
+  const embed = new MessageEmbed()
     .setColor(3447003)
     .setTitle(`${user.tag}`)
     .setThumbnail(`${avatarUrl}`);
@@ -15,8 +23,8 @@ exports.run = async (client, message) => {
     cours.forEach(target => {
       embed.addField("\u200b",Formatters.hyperlink(`${toProperCase(target.name)}`, `${target.link}`, `${target.link}`))
     });
-    
-    return message.reply({embeds: [embed]});
+
+    return embed
 }
 
 exports.conf = {

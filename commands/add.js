@@ -4,8 +4,9 @@ const { Op } = require('sequelize');
 
 exports.run = async (client, message, [kode, ...name]) => {
   
-  if(kode == null && name.length == 0) return
+  if(kode == null || name.length == 0) return 
   console.log(kode)
+  console.log(name.length)
   name.length == 0 ? name="unamed link" : name = name.join(' ')
   console.log(name)
   
